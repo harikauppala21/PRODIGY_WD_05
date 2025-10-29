@@ -1,48 +1,39 @@
-const apiKey = "YOUR_API_KEY_HERE"; // replace with your key for local testing
+document.addEventListener("DOMContentLoaded", function () {
+  const apiKey = "d175cb499f8bb403eb16ded8c8a7a9bd"; // your API key
+  const cityInput = document.getElementById("cityInput");
+  const getWeatherBtn = document.getElementById("getWeatherBtn");
+  const cityName = document.getElementById("cityName");
+  const temperature = document.getElementById("temperature");
+  const description = document.getElementById("description");
+  const humidity = document.getElementById("humidity");
 
-const searchBtn = document.getElementById("searchBtn");
-const cityInput = document.getElementById("cityInput");
-const weatherInfo = document.getElementById("weatherInfo");
+  getWeatherBtn.addEventListener("click", function () {
+    const city = cityInput.value.trim();
+    if (city === "") {
+      alert("Please enter a city name");
+      return;
+    }
 
-async function getWeather(city) {
-  if (!city) {
-    weatherInfo.innerHTML = "<p>Please enter a city name.</p>";
-    return;
-  }
-
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-
-  try {
-    const response = await fetch(url);
-    if (!response.ok) throw new Error("City not found");
-
-    const data = await response.json();
-    displayWeather(data);
-  } catch (error) {
-    weatherInfo.innerHTML = `<p>${error.message}</p>`;
-  }
-}
-
-function displayWeather(data) {
-  const { name, main, weather, wind } = data;
-
-  weatherInfo.innerHTML = `
-    <h3>${name}</h3>
-    <p><strong>Temperature:</strong> ${main.temp} °C</p>
-    <p><strong>Condition:</strong> ${weather[0].main}</p>
-    <p><strong>Humidity:</strong> ${main.humidity}%</p>
-    <p><strong>Wind Speed:</strong> ${wind.speed} m/s</p>
-  `;
-}
-
-searchBtn.addEventListener("click", () => {
-  const city = cityInput.value.trim();
-  getWeather(city);
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`)
+      .then((response) => {
+        if (!response.ok) throw new Error("City not found");
+        return response.json();
+      })
+      .then((data) => {
+        cityName.textContent = `📍 ${data.name}, ${data.sys.country}`;
+        temperature.textContent = `🌡 Temperature: ${data.main.temp} °C`;
+        description.textContent = `☁ Weather: ${data.weather[0].description}`;
+        humidity.textContent = `💧 Humidity: ${data.main.humidity}%`;
+      })
+      .catch((error) => {
+        cityName.textContent = "";
+        temperature.textContent = "";
+        description.textContent = "";
+        humidity.textContent = "";
+        alert("Error: " + error.message);
+      });
+  });
 });
 
-cityInput.addEventListener("keypress", (e) => {
-  if (e.key === "Enter") {
-    getWeather(cityInput.value.trim());
-  }
-});
+
 
