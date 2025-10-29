@@ -1,35 +1,44 @@
-* {
+body {
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(to right, #6dd5fa, #2980b9);
+  color: #fff;
+  text-align: center;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
-}
-
-body {
-  background: linear-gradient(135deg, #6dd5fa, #2980b9);
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #fff;
 }
 
 .container {
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(8px);
-  border-radius: 16px;
-  padding: 30px;
-  width: 350px;
-  text-align: center;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  margin-top: 100px;
 }
 
-.title {
-  margin-bottom: 20px;
-  font-size: 1.8rem;
+input {
+  padding: 10px;
+  width: 250px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
 }
 
-.search-box {
-  display: flex;
-  justify-content: center;
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #1e90ff;
+  color: white;
+  cursor: pointer;
+  margin-left: 10px;
 }
+
+button:hover {
+  background-color: #4682b4;
+}
+
+.weather-box {
+  margin-top: 30px;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 20px;
+  border-radius: 10px;
+  display: inline-block;
+  min-width: 300px;
+}
+
