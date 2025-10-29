@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const apiKey = "d175cb499f8bb403eb16ded8c8a7a9bd"; // your API key
+  const apiKey = "YOUR_API_KEY_HERE";
   const cityInput = document.getElementById("cityInput");
   const getWeatherBtn = document.getElementById("getWeatherBtn");
   const cityName = document.getElementById("cityName");
@@ -34,6 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   });
 });
+
 
 
 
